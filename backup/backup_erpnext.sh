@@ -15,7 +15,7 @@ TMP_FILE=$(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 6)
 # CUSTOM - script
 SCRIPT_NAME="backup_erpnext.sh"
 BASENAME=${SCRIPT_NAME}
-SCRIPT_VERSION="0.1.1"
+SCRIPT_VERSION="0.1.2"
 SCRIPT_START_TIME=$SECONDS                          # Script start time
 
 # CUSTOM - logs
@@ -73,7 +73,7 @@ echo -e "Started on \"$(hostname -f)\" at \"${_DATUM}\"" 2>&1 | tee -a ${FILE_LA
 echo -e "Script version is: \"${SCRIPT_VERSION}\"" 2>&1 | tee -a ${FILE_LAST_LOG}
 # echo -e "Datum: $(date "+%Y-%m-%d")" 2>&1 | tee -a ${FILE_LAST_LOG}
 echo -e "===========================" 2>&1 | tee -a ${FILE_LAST_LOG}
-echo -e " Run backup of LV snapshot" 2>&1 | tee -a ${FILE_LAST_LOG}
+echo -e "  Run backup of ERPNext"     2>&1 | tee -a ${FILE_LAST_LOG}
 echo -e "===========================" 2>&1 | tee -a ${FILE_LAST_LOG}
 echo " " 2>&1 | tee -a ${FILE_LAST_LOG}
 
@@ -162,7 +162,8 @@ fi
 (
 echo " "
 echo -e "======= Show all backup directories  ======="
-tree -i -d -L 1 ${BACKUPDIR} | sed '/director/d'
+#tree -i -d -L 1 ${BACKUPDIR} | sed '/director/d'
+tree -ah --du ${BACKUPDIR}
 ) 2>&1 | tee -a ${FILE_LAST_LOG}
 
 # print "end of script"
